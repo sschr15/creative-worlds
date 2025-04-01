@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class CommandsMixin {
     @Shadow @Final private CommandDispatcher<CommandSourceStack> dispatcher;
 
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lcom/mojang/brigadier/CommandDispatcher;setConsumer(Lcom/mojang/brigadier/ResultConsumer;)V"))
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lcom/mojang/brigadier/CommandDispatcher;setConsumer(Lcom/mojang/brigadier/ResultConsumer;)V", remap = false))
     private void sschr15_af25$registerCommands(Commands.CommandSelection selection, CommandBuildContext context, CallbackInfo ci) {
         CustomCommands.register(dispatcher, selection, context);
     }
