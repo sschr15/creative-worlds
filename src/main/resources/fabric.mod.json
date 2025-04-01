@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "creative-worlds",
+  "version": "${version}",
+  "name": "Creative Mines",
+  "description": "Re-adds Creative mode, and adds commands for the AF2025 features",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/creative-worlds/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+    ],
+    "main": [
+    ]
+  },
+  "mixins": [
+    "creative-worlds.mixins.json"
+  ],
+  "depends": {
+    "minecraft": ["15w14craftmine", "1.21.6-alpha.25.14.craftmine"]
+  }
+}
