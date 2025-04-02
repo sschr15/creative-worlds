@@ -52,6 +52,7 @@ public class CustomCommands {
 						}
 
 						primaryLevelData.unlockEffect(effect);
+						ctx.getSource().sendSuccess(() -> Text.literal("Unlocked effect ").append(effect.name()), true);
 						return Command.SINGLE_SUCCESS;
 					}))
 					.then(literal("all").executes(ctx -> {
@@ -64,6 +65,7 @@ public class CustomCommands {
 							primaryLevelData.unlockEffect(effect);
 						}
 
+						ctx.getSource().sendSuccess(() -> Text.literal("Unlocked all effects"), true);
 						return Command.SINGLE_SUCCESS;
 					}))
 				).then(literal("special_mine")
@@ -75,6 +77,7 @@ public class CustomCommands {
 						}
 
 						primaryLevelData.unlockSpecialMine(mine);
+						ctx.getSource().sendSuccess(() -> Text.literal("Unlocked mine ").append(mine.name()), true);
 						return Command.SINGLE_SUCCESS;
 					}))
 					.then(literal("all").executes(ctx -> {
@@ -87,6 +90,7 @@ public class CustomCommands {
 							primaryLevelData.unlockSpecialMine(mine);
 						}
 
+						ctx.getSource().sendSuccess(() -> Text.literal("Unlocked all mines"), true);
 						return Command.SINGLE_SUCCESS;
 					}))
 				).then(literal("player_ability")
@@ -95,6 +99,7 @@ public class CustomCommands {
 							Holder<PlayerUnlock> unlock = ResourceArgument.getResource(ctx, "unlock", Registries.PLAYER_UNLOCK);
 							ServerPlayer player = EntityArgument.getPlayer(ctx, "player");
 							player.forceUnlock(unlock);
+							ctx.getSource().sendSuccess(() -> Text.literal("Unlocked ability ").append(unlock.value().display().getTitle()), true);
 							return Command.SINGLE_SUCCESS;
 						}))
 						.then(literal("all")
@@ -104,6 +109,7 @@ public class CustomCommands {
 								BuiltInRegistries.PLAYER_UNLOCK.streamElements()
 									.filter(ref -> includeBad || !isHardKnock(ref))
 									.forEach(player::forceUnlock);
+								ctx.getSource().sendSuccess(() -> Text.literal(includeBad ? "Unlocked ALL abilities" : "Unlocked all abilities"), true);
 								return Command.SINGLE_SUCCESS;
 							}))
 							.executes(ctx -> {
@@ -111,6 +117,8 @@ public class CustomCommands {
 								BuiltInRegistries.PLAYER_UNLOCK.streamElements()
 									.filter(ref -> !isHardKnock(ref))
 									.forEach(player::forceUnlock);
+
+								ctx.getSource().sendSuccess(() -> Text.literal("Unlocked all abilities"), true);
 								return Command.SINGLE_SUCCESS;
 							})
 						)
